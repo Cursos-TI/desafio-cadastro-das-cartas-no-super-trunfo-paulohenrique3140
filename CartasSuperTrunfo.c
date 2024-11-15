@@ -1,21 +1,67 @@
 #include <stdio.h>
+#include <string.h>
 
 // Desafio Super Trunfo - Países
 // Tema 1 - Cadastro das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
-// Siga os comentários para implementar cada parte do desafio.
 
-int main() {
-    // Sugestão: Defina variáveis separadas para cada atributo da cidade.
-    // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
+typedef struct { // Estrutura para declarar variáveis que definem uma cidade
+    char nomeCidade[50], codCarta[3];
+    int populacao, pontosTuristicos;
+    float area, pib;
+} Cidade;
+
+int main() {  
+    Cidade cidades[4]; // Array para armazenar as cidades cadastradas
+    printf("###### DESAFIO SUPER TRUNFO ######\n");
     
     // Cadastro das Cartas:
-    // Sugestão: Utilize a função scanf para capturar as entradas do usuário para cada atributo.
-    // Solicite ao usuário que insira as informações de cada cidade, como o código, nome, população, área, etc.
+    for (int i = 0; i < 4; i++) {
+        printf("\nDigite o nome da %d.a cidade: ", i + 1);
+        // Usando fgets para ler o nome da cidade incluindo espaços
+        fgets(cidades[i].nomeCidade, sizeof(cidades[i].nomeCidade), stdin);
+        
+        // Remover o '\n' que fgets pode deixar no final da string
+        cidades[i].nomeCidade[strcspn(cidades[i].nomeCidade, "\n")] = '\0';
+
+        printf("Digite o código da carta com três dígitos [Exemplo: A01]: ");
+        scanf("%s", cidades[i].codCarta);
+
+        getchar(); // Consumir o '\n' deixado pelo scanf anterior
+        
+        printf("Digite a população da cidade: ");
+        scanf("%d", &cidades[i].populacao);  // Ler inteiro
+
+        getchar(); // Consumir o '\n' deixado pelo scanf anterior
+
+        printf("Digite a área em km²: ");
+        scanf("%f", &cidades[i].area);  // Ler número decimal (float)
+
+        getchar(); // Consumir o '\n' deixado pelo scanf anterior
+
+        printf("Digite o PIB da cidade: ");
+        scanf("%f", &cidades[i].pib);  // Ler número decimal (float)
+
+        getchar(); // Consumir o '\n' deixado pelo scanf anterior
+
+        printf("Digite o número de pontos turísticos da cidade: ");
+        scanf("%d", &cidades[i].pontosTuristicos);  // Ler inteiro
+        
+        // Consumir o '\n' deixado após o último scanf
+        getchar(); 
+    }
+    
+    printf("\n###### CARTAS DISPONÍVEIS ######");
     
     // Exibição dos Dados das Cartas:
-    // Sugestão: Utilize a função printf para exibir as informações das cartas cadastradas de forma clara e organizada.
-    // Exiba os valores inseridos para cada atributo da cidade, um por linha.
+    for (int i = 0; i < 4; i++) {
+        printf("\nCarta: %s\nCidade: %s\nPopulação: %d\nÁrea: %.1f km²\nPIB: R$ %.2f\nNúmero de pontos turísticos: %d\n", 
+        cidades[i].codCarta,
+        cidades[i].nomeCidade,
+        cidades[i].populacao,
+        cidades[i].area,
+        cidades[i].pib,
+        cidades[i].pontosTuristicos);
+    }
 
     return 0;
 }
